@@ -2,8 +2,9 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <script type="text/javascript" src="js/answer.js"></script>
     <title>Some puzzles for fun</title>
-    <link rel="stylesheet" type="text/css" href="css/font.css"/>
+    <link rel="stylesheet" type="text/css" href="css/font.css">
     <link rel="shortcut icon" href="favicon.ico">
     <style type="text/css">
       .title{
@@ -146,9 +147,15 @@
   </head>
   <body style="margin: 0px;">
     <body bgcolor="#fa9490" style="margin-bottom:0;">
+      <div id='name1' style="color: #363636;position: absolute;font-family:'HMS';font-size: 100px;line-height: 270%;margin-top: -70px;margin-bottom: 0;margin-left: 170px;"></div>
+      <script>
+        var userName = prompt("Hi, what's your name? 🙈")
+        alert("Hello " + userName + ", here are some puzzles for you! 👻 ")
+        document.getElementById('name1').innerHTML = userName;//在div节点上显示
+      </script>
       <div class="all" style="margin: 0;">
         <div class="title"><!-- 网站顶部的title和大图 -->
-          <h1>Hi, Kevin<br>Here are some<br>puzzles for fun.</h1>
+          <h1 id="titleusername">Hi, <br>Here are some<br>puzzles for fun.</h1>
           <h5 style="font-size:20px;line-height: 0%;margin-bottom: 60px;">©️Made by Kevin Xu</h5>
           <img src="pictures/Top/Saly-19.png" alt="图像加载失败" id="toppic">
         </div>
@@ -156,23 +163,23 @@
           <div class="allpuzzle"><!-- 所有的puzzle，flex布局 -->
             <div class="singlepuzzle">
               <img src="pictures/Puzzles/Questions/1.jpg" alt="puzzle1" class="puzzlequestionpic">
-              <button type="button" class="type2answer1">click to answer</button>
-              <button type="button" class="type2reveal">click to reveal</button>
+              <button type="button" class="type2answer1" onclick="answer1()">click to answer</button>
+              <button type="button" class="type2reveal" onclick="reveal1()">click to reveal</button>
             </div>
             <div class="singlepuzzle">
-              <img src="pictures/Puzzles/Questions/2.jpg" alt="puzzle1" class="puzzlequestionpic">
-              <button type="button" class="type2answer2">click to answer</button>
-              <button type="button" class="type2reveal">click to reveal</button>
+              <img src="pictures/Puzzles/Questions/2.jpg" alt="puzzle2" class="puzzlequestionpic">
+              <button type="button" class="type2answer2" onclick="answer2()">click to answer</button>
+              <button type="button" class="type2reveal" onclick="reveal2()">click to reveal</button>
             </div>
             <div class="singlepuzzle">
-              <img src="pictures/Puzzles/Questions/3.jpg" alt="puzzle1" class="puzzlequestionpic">
-              <button type="button" class="type2answer3">click to answer</button>
-              <button type="button" class="type2reveal">click to reveal</button>
+              <img src="pictures/Puzzles/Questions/3.jpg" alt="puzzle3" class="puzzlequestionpic">
+              <button type="button" class="type2answer3"  onclick="answer3()">click to answer</button>
+              <button type="button" class="type2reveal" onclick="reveal3()">click to reveal</button>
             </div>
             <div class="singlepuzzle">
-              <img src="pictures/Puzzles/Questions/4.jpg" alt="puzzle1" class="puzzlequestionpic">
-              <button type="button" class="type2answer4">click to answer</button>
-              <button type="button" class="type2reveal">click to reveal</button>
+              <img src="pictures/Puzzles/Questions/4.jpg" alt="puzzle4" class="puzzlequestionpic">
+              <button type="button" class="type2answer4"  onclick="answer4()">click to answer</button>
+              <button type="button" class="type2reveal" onclick="reveal4()">click to reveal</button>
             </div>
           </div>
         </div>
