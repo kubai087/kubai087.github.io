@@ -1,3 +1,12 @@
+@charset "UTF-8";
+
 @font-face {
-	font-family:'HarmonyOS_Sans_Black';
-	src: url('fonts/HarmonyOS_Sans_Black.ttf');
+  font-family: "仓耳非白W04";
+  src: url("fonts/HarmonyOS_Sans_Black.woff2") format("woff2"),
+       url("fonts/HarmonyOS_Sans_Black.woff") format("woff"),
+       url("fonts/HarmonyOS_Sans_Black.ttf") format("truetype"),
+       url("fonts/HarmonyOS_Sans_Black.eot") format("embedded-opentype"),
+       url("fonts/HarmonyOS_Sans_Black.svg") format("svg");
+  font-weight: black;
+  font-style: normal;
+}
