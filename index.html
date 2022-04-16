@@ -1,149 +1,12 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
     <script type="text/javascript" src="js/answer.js"></script>
     <title>Some puzzles for fun</title>
     <link rel="stylesheet" type="text/css" href="css/font.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
     <link rel="shortcut icon" href="favicon.ico">
-    <style type="text/css">
-      .title{
-        color: #363636;
-        font-family:'HMS';
-        font-size: 48px;
-        line-height: 270%;
-        margin-left: 2%;
-      }
-      #toppic{
-        width: 50%;
-        position: absolute;
-        top: -15%;
-        right: 3%;
-        bottom: 20%;
-      }
-      #bgroundedrectangle{
-        background-color: #fafafa;
-        border-radius: 78px 78px 0px 0px;
-        height: 680px;
-        width: 100%;
-        position: relative;
-      }
-/* flex布局的样式来源于CSDN：https://blog.csdn.net/webEvelement/article/details/82850370*/
-      .allpuzzle {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-flow: row wrap;
-        align-content: flex-start;
-      }
-      .singlepuzzle {
-        box-sizing: border-box;
-        flex: 0 0 25%;
-        height: 50px;
-        /* border: 1px solid red; */
-      }
-      .puzzlequestionpic{
-        width: 80%;
-        margin-left: 10%;
-        margin-top: 12%;
-        border-radius: 39px;
-      }
-/* 渐变色动画Button教程：https://www.jianshu.com/p/b2357614951f */
-      .type2answer1{
-        background-color: #ffefd6;
-        cursor: pointer;
-        border-radius: 53px;
-        border: 0;
-        width: 80%;
-        height: 120%;
-        margin-left: 10%;
-        margin-top: 8%;
-        color: rgba(92,87,87,0.58);
-        font-size: 158%;
-        letter-spacing: 1px;
-        cursor: pointer;
-        transition: 0.3s;
-      }
-      .type2answer1:hover{
-        transform: scale(1.05);
-      }
-      .type2answer2{
-        background-color: #F2E4FE;
-        cursor: pointer;
-        border-radius: 53px;
-        border: 0;
-        width: 80%;
-        height: 120%;
-        margin-left: 10%;
-        margin-top: 8%;
-        color: rgba(92,87,87,0.58);
-        font-size: 158%;
-        letter-spacing: 1px;
-        cursor: pointer;
-        transition: 0.3s;
-      }
-      .type2answer2:hover{
-        transform: scale(1.05);
-      }
-      .type2answer3{
-        background-color: #CDFAFF;
-        cursor: pointer;
-        border-radius: 53px;
-        border: 0;
-        width: 80%;
-        height: 120%;
-        margin-left: 10%;
-        margin-top: 8%;
-        color: rgba(92,87,87,0.58);
-        font-size: 158%;
-        letter-spacing: 1px;
-        cursor: pointer;
-        transition: 0.3s;
-      }
-      .type2answer3:hover{
-        transform: scale(1.05);
-      }
-      .type2answer4{
-        background-color: #FFE3EF;
-        cursor: pointer;
-        border-radius: 53px;
-        border: 0;
-        width: 80%;
-        height: 120%;
-        margin-left: 10%;
-        margin-top: 8%;
-        color: rgba(92,87,87,0.58);
-        font-size: 158%;
-        letter-spacing: 1px;
-        cursor: pointer;
-        transition: 0.3s;
-      }
-      .type2answer4:hover{
-        transform: scale(1.05);
-      }
-      .type2reveal{
-        background-image:linear-gradient(135deg, #BCBCFF,#8E8DFF);
-        box-shadow: 0px 14px 48px rgba(166, 166, 255, 0.37);
-        border-radius: 53px;
-        border: 0;
-        width: 80%;
-        height: 120%;
-        margin-left: 10%;
-        margin-top: 8%;
-        color: rgba(255, 255, 255, 1);
-        font-size: 158%;
-        text-shadow: 0px 4px 11px rgba(139, 138, 234, 1);
-        letter-spacing: 1px;
-        cursor: pointer;
-        background-size: 200%;
-        transition: 0.3s;
-      }
-      .type2reveal:hover{
-        box-shadow: 0 10px 20px 0 rgba(47,55,213,0.2);
-        background-position: right;
-        transform: scale(1.05);
-      }
-    </style>
   </head>
   <body style="margin: 0px;">
     <body bgcolor="#fa9490" style="margin-bottom:0;">
@@ -157,27 +20,27 @@
         <div class="title"><!-- 网站顶部的title和大图 -->
           <h1 id="titleusername">Hi, <br>Here are some<br>puzzles for fun.</h1>
           <h5 style="font-size:20px;line-height: 0%;margin-bottom: 60px;">©️Made by Kevin Xu</h5>
-          <img src="pictures/Top/Saly-19.png" alt="图像加载失败" id="toppic">
+          <img src="assets/images/top/Saly-19.png" alt="图像加载失败" id="toppic">
         </div>
         <div id="bgroundedrectangle"><!-- 承载puzzle的白色圆角矩形底板 -->
           <div class="allpuzzle"><!-- 所有的puzzle，flex布局 -->
             <div class="singlepuzzle">
-              <img src="pictures/Puzzles/Questions/1.jpg" alt="puzzle1" class="puzzlequestionpic">
+              <img src="assets/images/puzzles/Questions/1.jpg" alt="puzzle1" class="puzzlequestionpic">
               <button type="button" class="type2answer1" onclick="answer1()">click to answer</button>
               <button type="button" class="type2reveal" onclick="reveal1()">click to reveal</button>
             </div>
             <div class="singlepuzzle">
-              <img src="pictures/Puzzles/Questions/2.jpg" alt="puzzle2" class="puzzlequestionpic">
+              <img src="assets/images/puzzles/Questions/2.jpg" alt="puzzle2" class="puzzlequestionpic">
               <button type="button" class="type2answer2" onclick="answer2()">click to answer</button>
               <button type="button" class="type2reveal" onclick="reveal2()">click to reveal</button>
             </div>
             <div class="singlepuzzle">
-              <img src="pictures/Puzzles/Questions/3.jpg" alt="puzzle3" class="puzzlequestionpic">
+              <img src="assets/images/puzzles/Questions/3.jpg" alt="puzzle3" class="puzzlequestionpic">
               <button type="button" class="type2answer3"  onclick="answer3()">click to answer</button>
               <button type="button" class="type2reveal" onclick="reveal3()">click to reveal</button>
             </div>
             <div class="singlepuzzle">
-              <img src="pictures/Puzzles/Questions/4.jpg" alt="puzzle4" class="puzzlequestionpic">
+              <img src="assets/images/puzzles/Questions/4.jpg" alt="puzzle4" class="puzzlequestionpic">
               <button type="button" class="type2answer4"  onclick="answer4()">click to answer</button>
               <button type="button" class="type2reveal" onclick="reveal4()">click to reveal</button>
             </div>
