@@ -1,141 +1,64 @@
-.title{
-  color: #363636;
-  font-family:'HMS';
-  font-size: 48px;
-  line-height: 270%;
-  margin-left: 2%;
+/* navbar */
+*{
+  text-decoration: none;
 }
-#toppic{
-  width: 50%;
+#navbar_main{
+  background-color: #ffffff;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #dbdbdb;
+}
+#nav_content{
+  font-family: Raleway,Source Sans Pro;
+  font-weight: 900;
+}
+/* general */
+#body{
+  background-color: #f1f1f1;
+}
+.container-fluid{
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-top: 5em;
+}
+#cas{
   position: absolute;
-  top: -15%;
-  right: 3%;
-  bottom: 20%;
 }
-#bgroundedrectangle{
-  background-color: #fafafa;
-  border-radius: 78px 78px 0px 0px;
-  height: 680px;
-  width: 100%;
+/* 顶部左边的profile */
+.left_profile_content{
+  padding-bottom: 0.5em;
+}
+.the_title{
+  font-family: Raleway,Source Sans Pro;
+  font-weight: 900;
+  font-size: 2em;
+  letter-spacing: 0.300em;
+  color: #2e2d2d;
+}
+#my_description{
+  font-family: Raleway,Source Sans Pro;
+  font-weight: 350;
+  font-size: 0.9em;
+  color: #8a8a8a;
+  line-height: 0.5em;
+}
+.profile_icon{
+  width: 0.9em;
   position: relative;
+  top: -0.1em;
 }
-/* flex布局的样式来源于CSDN：https://blog.csdn.net/webEvelement/article/details/82850370*/
-.allpuzzle {
+/* 固定背景图 */
+#figure_background{
+  position: relative;
   width: 100%;
-  height: 100%;
-  display: flex;
-  flex-flow: row wrap;
-  align-content: flex-start;
+  height: 60%;
+  margin: 0;
 }
-.singlepuzzle {
-  box-sizing: border-box;
-  flex: 0 0 25%;
-  height: 50px;
-  /* border: 1px solid red; */
-}
-.puzzlequestionpic{
-  width: 80%;
-  margin-left: 10%;
-  margin-top: 12%;
-  border-radius: 39px;
-}
-/* 渐变色动画Button教程：https://www.jianshu.com/p/b2357614951f */
-.type2answer1{
-  font-family:'HMS';
-  background-color: #ffefd6;
-  cursor: pointer;
-  border-radius: 53px;
-  border: 0;
-  width: 80%;
-  height: 120%;
-  margin-left: 10%;
-  margin-top: 8%;
-  color: rgba(92,87,87,0.58);
-  font-size: 158%;
-  letter-spacing: 1px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-.type2answer1:hover{
-  transform: scale(1.05);
-}
-.type2answer2{
-  font-family:'HMS';
-  background-color: #F2E4FE;
-  cursor: pointer;
-  border-radius: 53px;
-  border: 0;
-  width: 80%;
-  height: 120%;
-  margin-left: 10%;
-  margin-top: 8%;
-  color: rgba(92,87,87,0.58);
-  font-size: 158%;
-  letter-spacing: 1px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-.type2answer2:hover{
-  transform: scale(1.05);
-}
-.type2answer3{
-  font-family:'HMS';
-  background-color: #CDFAFF;
-  cursor: pointer;
-  border-radius: 53px;
-  border: 0;
-  width: 80%;
-  height: 120%;
-  margin-left: 10%;
-  margin-top: 8%;
-  color: rgba(92,87,87,0.58);
-  font-size: 158%;
-  letter-spacing: 1px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-.type2answer3:hover{
-  transform: scale(1.05);
-}
-.type2answer4{
-  font-family:'HMS';
-  background-color: #FFE3EF;
-  cursor: pointer;
-  border-radius: 53px;
-  border: 0;
-  width: 80%;
-  height: 120%;
-  margin-left: 10%;
-  margin-top: 8%;
-  color: rgba(92,87,87,0.58);
-  font-size: 158%;
-  letter-spacing: 1px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-.type2answer4:hover{
-  transform: scale(1.05);
-}
-.type2reveal{
-  font-family:'HMS';
-  background-image:linear-gradient(135deg, #BCBCFF,#8E8DFF);
-  box-shadow: 0px 14px 48px rgba(166, 166, 255, 0.37);
-  border-radius: 53px;
-  border: 0;
-  width: 80%;
-  height: 120%;
-  margin-left: 10%;
-  margin-top: 8%;
-  color: rgba(255, 255, 255, 1);
-  font-size: 158%;
-  text-shadow: 0px 4px 11px rgba(139, 138, 234, 1);
-  letter-spacing: 1px;
-  cursor: pointer;
-  background-size: 200%;
-  transition: 0.3s;
-}
-.type2reveal:hover{
-  box-shadow: 0 10px 20px 0 rgba(47,55,213,0.2);
-  background-position: right;
-  transform: scale(1.05);
+#fixed{
+  background-image: url('../assets/img/background_fixed.png');
+  height: 20em;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
 }

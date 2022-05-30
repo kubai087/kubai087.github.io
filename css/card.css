@@ -1,0 +1,145 @@
+/* https://codepen.io/joshuaward/pen/robbMx 引用项目地址；有二次修改 */
+a{
+  text-decoration: none;
+}
+.card_works {
+  position: relative;
+  width: 100%;
+  height: 17em;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 4px 4px 0 0;
+  transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+  overflow: hidden;
+  text-decoration: none;
+}
+ /* 每个卡片的 封面 */
+#card_image_1 {
+  background-image: url('https://img.zcool.cn/community/014cd85ff7012711013ee04d93f36f.png?x-oss-process=image/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100');
+}
+#card_image_2 {
+  background-image: url('https://img.zcool.cn/community/01b77d5fd781cb11013fdcc7305d31.png?x-oss-process=image/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100');
+}
+#card_image_3 {
+  background-image: url('https://img.zcool.cn/community/0129825e70672fa80120a8953c5295.jpg?x-oss-process=image/resize,m_fill,w_520,h_390,limit_0/auto-orient,1/sharpen,100');
+}
+#card_image_4 {
+  background-image: url('https://img.zcool.cn/community/0124bc5f2cd470a801215aa0560715.jpg?x-oss-process=image/resize,m_fill,w_520,h_390,limit_0/auto-orient,1/sharpen,100');
+}
+#card_image_5 {
+  background-image: url('https://img.zcool.cn/community/0133465ed30d7ea801215aa082ff4f.jpg?x-oss-process=image/resize,m_fill,w_520,h_390,limit_0/auto-orient,1/sharpen,100');
+}
+#card_image_6 {
+  background-image: url('https://img.zcool.cn/community/0174255e69d9fca80121651831a7ff.jpg?x-oss-process=image/resize,m_fill,w_520,h_390,limit_0/auto-orient,1/sharpen,100');
+}
+#card_image_7 {
+  background-image: url('https://img.zcool.cn/community/0188145e647f7da80120a895877199.jpg?x-oss-process=image/resize,m_fill,w_520,h_390,limit_0/auto-orient,1/sharpen,100');
+}
+#card_image_8 {
+  background-image: url('https://img.zcool.cn/community/01d2e65e646791a801216518be6437.jpg?x-oss-process=image/resize,m_fill,w_520,h_390,limit_0/auto-orient,1/sharpen,100');
+}
+.card_works:before, .card_works:after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.card_works:before {
+  content: '';
+  background-color: rgba(0, 0, 0, 0.1);
+  z-index: 0;
+}
+.card_works:after {
+  content: '';
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+  overflow: hidden;
+}
+.card_works:hover {
+  background-size: cover;
+  text-decoration: none;
+}
+.card_works:hover:after {
+  content: url(../assets/img/logo.png);
+  background-color: rgba(25, 28, 31, 0.9);
+  color: white;
+  font-size: 20px;
+  z-index: 2;
+  text-decoration: none;
+}
+.card_works:hover .date {
+  bottom: -59px;
+}
+.card_works:hover figcaption {
+  transform: translateY(-110%);
+}
+.card_works .date {
+  position: absolute;
+  bottom: 0;
+  right: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 10px;
+  background-color: #191c1f;
+  transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.card_works .date span {
+  color: white;
+  line-height: 1;
+}
+.card_works .date span:first-child {
+  font-family: Raleway,Source Sans Pro;
+  font-size: 20px;
+  font-weight: 900;
+}
+.card_works .date span:last-child {
+  font-size: 14px;
+  font-weight: 400;
+}
+.card_works figcaption {
+  color: white;
+  transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+  z-index: 1;
+}
+/* 作品卡片标题 */
+.card-title{
+  letter-spacing: 0.05em;
+  /* 限制最大字数 */
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 1.3em;
+  font-family: Raleway,Source Sans Pro;
+  color: #2e2d2d;
+  font-weight: 700;
+}
+.card-works{
+  margin-top: -0.5em;
+}
+/* 作品卡片正文 */
+.card-text-works{
+  /* 限制最大字数 */
+  letter-spacing: 0.05em;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-family: Raleway,Source Sans Pro;
+  font-weight: 350;
+  font-size: 1em;
+  color: #8a8a8a;
+  line-height: 1.4em;
+}
+.card-tag {
+  text-decoration: none;
+  font-family: Raleway,Source Sans Pro;
+  color: #2e2d2d;
+}
+.card-text-tag {
+   color: #a3abb2;
+}
