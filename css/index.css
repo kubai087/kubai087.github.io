@@ -3,7 +3,7 @@
   text-decoration: none;
 }
 /* 当页面宽度小于770px（一般是手机浏览器的时候）不显示粒子 */
-@media screen and (max-width:770px){
+@media screen and (max-width:770px) {
 #cas{
   visibility: hidden;
 }
