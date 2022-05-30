@@ -1,7 +1,6 @@
 /* https://codepen.io/pouretrebelle/pen/nmdPvj 原项目地址 */
 .ss-icon {
   width: 100%;
-  font-size: 15px;
 }
 /* 黑色方块的样式 */
 .social_media {
@@ -39,7 +38,7 @@
 }
 
 .social_media:nth-child(1):hover .social_media_article {
-  background-color: #3B5998;
+  background-color: #d6c002;
 }
 
 .social_media:nth-child(2):hover .social_media_article {
@@ -47,23 +46,23 @@
 }
 
 .social_media:nth-child(3):hover .social_media_article {
-  background-color: #2C4762;
+  background-color: #1D9BF0;
 }
 
 .social_media:nth-child(4):hover .social_media_article {
-  background-color: #CB2027;
+  background-color: #0057FF;
 }
 
 .social_media:nth-child(5):hover .social_media_article {
-  background-color: #1769FF;
+  background-color: #07C160;
 }
 
 .social_media:nth-child(6):hover .social_media_article {
-  background-color: #4183C4;
+  background-color: #D52C2B;
 }
 
 .social_media:nth-child(7):hover .social_media_article {
-  background-color: #3399CC;
+  background-color: #FF738C;
 }
 
 .social_media:nth-child(8):hover .social_media_article {

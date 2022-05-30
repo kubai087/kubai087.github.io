@@ -1,11 +1,20 @@
-/* navbar */
-*{
+a {
   text-decoration: none;
 }
+a:hover {
+  text-decoration: none;
+}
+a:visited {
+  text-decoration: none;
+}
+/* navbar */
 /* 当页面宽度小于770px（一般是手机浏览器的时候）不显示粒子 */
-/* 使用 media 的时候需要严格遵守空格，否则在本地有效的media在 github page 上就会失效 */
+/* 使用 media 的时候需要严格遵守空格，否则在本地有效的media在 github page上就会失效 */
 @media screen and (max-width:770px) {
 #cas{
+  visibility: hidden;
+}
+#figure_background{
   visibility: hidden;
 }
 }
@@ -69,15 +78,12 @@
   background-position: center;
   background-size: cover;
 }
-/*  */
-#fixed:before {
-  content: ' ';
-  position: fixed;
-  z-index: -1;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background: url(../assets/img/background_fixed.png) center 0 no-repeat;
-  background-size: cover;
+/* 居中提示语 */
+.tip_middle{
+  padding-top: 2em;
+  padding-bottom: 10em;
+  font-family: Raleway,Source Sans Pro;
+  text-align: center;
+  font-size: 1em;
+  color: #8a8a8a;
 }
