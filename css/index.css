@@ -2,6 +2,12 @@
 *{
   text-decoration: none;
 }
+/* 当页面宽度小于770px（一般是手机浏览器的时候）不显示粒子 */
+@media screen and (max-width:770px){
+#cas{
+  visibility: hidden;
+}
+}
 #navbar_main{
   background-color: #ffffff;
   border-style: solid;
@@ -60,5 +66,17 @@
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
+  background-size: cover;
+}
+/*  */
+#figure_background:before {
+  content: ' ';
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: url(../assets/img/background_fixed.png) center 0 no-repeat;
   background-size: cover;
 }
