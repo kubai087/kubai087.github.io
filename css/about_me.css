@@ -1,0 +1,52 @@
+.about_me_background {
+  margin-left: 6%;
+  margin-right: 6%;
+  padding-bottom:8%;
+  padding-top:8em;
+  z-index: 100;
+  height: 100vh;
+}
+
+#about_me_body {
+  background-color: #F1F1F1;
+}
+
+#about_me_avatar {
+/* img是inline元素，把它变成块元素之后就占一行了，左右设置成auto就可以了 */
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 9em;
+}
+#about_me_title {
+  padding-top: 1em;
+  text-align: center;
+  font-family: Source Sans Pro;
+  font-weight: 900;
+  font-size: 2em;
+  color: #2e2d2d;
+}
+#about_me_passage_div {
+  padding-top: 1em;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 70em;
+}
+#about_me_passage {
+  font-family: Source Sans Pro;
+  font-weight: 350;
+  font-size: 1.1m;
+  color: #8a8a8a;
+  letter-spacing: 0.05em;
+  line-height: 1.8em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
+#about_me_short_info {
+  color: #656565;
+  text-align: center;
+  font-size: 1.2em;
+  font-family: Source Sans Pro;
+  font-weight: 600;
+}
