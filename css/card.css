@@ -119,6 +119,10 @@ a{
   color: #2e2d2d;
   font-weight: 700;
 }
+.card-title:hover{
+  color: #717171;
+  transition: 0.1s;
+}
 .card-works{
   margin-top: -0.5em;
 }
@@ -135,6 +139,12 @@ a{
   color: #8a8a8a;
   line-height: 1.4em;
 }
+
+.card-text-works:hover{
+  color: #bcbcbc;
+  transition: 0.1s;
+}
+
 .card-tag {
   text-decoration: none;
   font-family: Raleway,Source Sans Pro;
