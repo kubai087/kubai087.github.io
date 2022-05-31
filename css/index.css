@@ -46,7 +46,7 @@ a:visited {
   padding-bottom: 0.5em;
 }
 .the_title{
-  font-family: 'Raleway,Source Sans Pro';
+  font-family: "Raleway","Source Sans Pro";
   font-weight: 900;
   font-size: 2em;
   letter-spacing: 0.300em;
