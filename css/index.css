@@ -10,12 +10,13 @@ a:visited {
 /* navbar */
 /* 当页面宽度小于770px（一般是手机浏览器的时候）不显示粒子 */
 /* 使用 media 的时候需要严格遵守空格，否则在本地有效的media在 github page上就会失效 */
+/* 注意！！！！！新学的注意事项：visibility是隐藏，但是不会去除该模块的占位（如果是relative） 但是display会去除占位。 */
 @media screen and (max-width:770px) {
 #cas{
   visibility: hidden;
 }
 #figure_background{
-  visibility: hidden;
+  display: none;
 }
 }
 #navbar_main{

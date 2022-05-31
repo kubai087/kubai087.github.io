@@ -13,19 +13,34 @@
   filter: contrast(40);
 }
 
-#main_page_title {
+.main_page_title {
+  font-family: Raleway,Source Sans Pro;
+  font-weight: 900;
+  font-size: 5em;
+  padding-left: 6%;
+  padding-right: 6%
+}
+
+.main_page_div {
+  z-index: 120;
+/* 如果需要一个元素不参与底层元素的按此排序，那么就把他的z-index提高一点，这样就会开启一个新的排序 */
   position: relative;
-  color: #333;
-  z-index: 100;
-  font-size: 7rem;
-  display: inline-block;
-  filter: blur(4px);
-  font-weight: bold;
+  text-align: center;
+  top: 40vh;
+}
+
+#main_page_proverbs{
+  font-family: Raleway,Source Sans Pro;
+  font-weight: 350;
+}
+.btn_font {
+  font-family: Raleway,Source Sans Pro;
+  font-weight: 900;
 }
 
 .metaball {
   position: absolute;
-  background: black;
+  background-color:#2d2d2d;
   border-radius: 100%;
   filter: blur(15px);
 }

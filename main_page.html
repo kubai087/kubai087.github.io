@@ -1,0 +1,507 @@
+<!doctype html>
+<html>
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>KUBAI DESIGNS 枯白的匣子</title>
+    <!-- Bootstrap CSS -->
+    <link rel="shortcut icon" href="favicon.png">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="css/card.css">
+    <link rel="stylesheet" type="text/css" href="css/socialmedia.css">
+    <script type="text/javascript" src="js/netparticle_background.js"></script>
+    <script type="text/javascript">canvas</script>
+    <script type="text/javascript">ctr</script>
+    <link rel="stylesheet" href="css/footer.css">
+  </head>
+  <body id="body">
+    <!-- 网格背景的js，因为外部引用无法生效搞不明白，只能写这里了 项目原地址：https://github.com/whxaxes/canvas-test-->
+    <canvas id="cas"></canvas>
+    <script>
+      var canvas = document.getElementById("cas");
+      var ctx = canvas.getContext("2d");
+
+      resize();
+      window.onresize = resize;
+
+      function resize() {
+        canvas.width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+        canvas.height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+      }
+
+      var RAF = (function() {
+        return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function(callback) {
+              window.setTimeout(callback, 1000 / 60);
+            };
+      })();
+
+      // 鼠标活动时，获取鼠标坐标
+      var warea = {x: null, y: null, max: 2000};
+      window.onmousemove = function(e) {
+        e = e || window.event;
+
+        warea.x = e.clientX;
+        warea.y = e.clientY;
+      };
+      window.onmouseout = function(e) {
+        warea.x = null;
+        warea.y = null;
+      };
+
+      // 添加粒子
+      // x，y为粒子坐标，xa, ya为粒子xy轴加速度，max为连线的最大距离
+      // i 后面这个数值可以控制粒子的数量
+      var dots = [];
+      for (var i = 0; i < 100; i++) {
+        var x = Math.random() * canvas.width;
+        var y = Math.random() * canvas.height;
+        var xa = Math.random() * 2 - 1;
+        var ya = Math.random() * 2 - 1;
+
+        dots.push({
+          x: x,
+          y: y,
+          xa: xa,
+          ya: ya,
+          max: 4500
+        })
+      }
+
+      // 延迟100秒开始执行动画，如果立即执行有时位置计算会出错
+      setTimeout(function() {
+        animate();
+      }, 100);
+
+      // 每一帧循环的逻辑
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // 将鼠标坐标添加进去，产生一个用于比对距离的点数组
+        var ndots = [warea].concat(dots);
+
+        dots.forEach(function(dot) {
+
+          // 粒子位移
+          dot.x += dot.xa;
+          dot.y += dot.ya;
+
+          // 遇到边界将加速度反向
+          dot.xa *= (dot.x > canvas.width || dot.x < 0) ? -1 : 1;
+          dot.ya *= (dot.y > canvas.height || dot.y < 0) ? -1 : 1;
+
+          // 绘制点
+          ctx.fillRect(dot.x - 0.5, dot.y - 0.5, 1, 1);
+
+          // 循环比对粒子间的距离
+          for (var i = 0; i < ndots.length; i++) {
+            var d2 = ndots[i];
+
+            if (dot === d2 || d2.x === null || d2.y === null) continue;
+
+            var xc = dot.x - d2.x;
+            var yc = dot.y - d2.y;
+
+            // 两个粒子之间的距离
+            var dis = xc * xc + yc * yc;
+
+            // 距离比
+            var ratio;
+
+            // 如果两个粒子之间的距离小于粒子对象的max值，则在两个粒子间画线
+            if (dis < d2.max) {
+
+              // 如果是鼠标，则让粒子向鼠标的位置移动
+              if (d2 === warea && dis > (d2.max / 2)) {
+                dot.x -= xc * 0.03;
+                dot.y -= yc * 0.03;
+              }
+
+              // 计算距离比
+              ratio = (d2.max - dis) / d2.max;
+
+              // 画线
+              ctx.beginPath();
+              ctx.lineWidth = ratio / 2;
+              ctx.strokeStyle = 'rgba(0,0,0,' + (ratio + 0.2) + ')';
+              ctx.moveTo(dot.x, dot.y);
+              ctx.lineTo(d2.x, d2.y);
+              ctx.stroke();
+            }
+          }
+
+          // 将已经计算过的粒子从数组中删除
+          ndots.splice(ndots.indexOf(dot), 1);
+        });
+
+        RAF(animate);
+      }
+    </script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <canvas id="cas"></canvas>
+
+    <!-- navbar -->
+    <nav id="navbar_main" class="navbar fixed-top navbar-expand-lg navbar-light">
+      <!-- brand -->
+      <a class="navbar-brand" href="#">
+        <img src="assets/img/navbar_logo.png" width="200px" alt="brand_logo" style="padding-bottom: 0.25em;">
+      </a>
+      <!-- nav收缩起来时候的button -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+
+          <li id="nav_content" class="nav-item">
+            <a class="nav-link" href="index.html">主页 </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#">|</a>
+          </li>
+
+          <li class="nav-item active">
+            <a id="nav_content" class="nav-link" href="#">作品 <span class="sr-only">(current)</span></a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#">|</a>
+          </li>
+
+          <li id="nav_content" class="nav-item">
+            <a class="nav-link" href="#">文章 </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#">|</a>
+          </li>
+
+          <li id="nav_content" class="nav-item">
+            <a class="nav-link" href="#">关于 </a>
+          </li>
+
+        </ul>
+      </div>
+    </nav>
+  </body>
+</html>
+ <!-- 第一个自适应模块-->
+ <!-- 设置两边的空白和顶部空白 -->
+<div class="container-fluid" style="padding-bottom:8%;padding-top:8em;">
+  <div class="row jumbtron">
+    <!-- 左边的个人介绍 div -->
+    <div class="<col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4" style="padding-bottom:3em;">
+      <div id="left_profile" style="padding-top:8%;">
+        <img class="left_profile_content" src="assets/img/logo_all.png" alt="all_logo" width="80%"style="padding-bottom: 2em;">
+        <p class="left_profile_content the_title" >KUBAI DESIGNS</p>
+        <hr />
+    <!-- icon和介绍 -->
+        <div style="padding-top:0; width:100%;">
+          <p id="my_description" class="left_profile_content" >  <img src="assets/img/icons/profile.svg" class="profile_icon"">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UX 设计师 / 3C 数码爱好者</p>
+          <p id="my_description" class="left_profile_content" >  <img src="assets/img/icons/bxs-school.svg" class="profile_icon"">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;中国传媒大学</p>
+        </div>
+        </div>
+    <!-- 社交媒体 -->
+      <section class="ss-icon" width="80%">
+        <a target="_blank" class="social_media"href="https://chenmudw.zcool.com.cn"><article class="social_media_article"><img src="assets/img/icons/zcool.svg"style="width:67%;padding-top:0.3em;"></article></a>
+        <a target="_blank" class="social_media"href="https://space.bilibili.com/39590158?spm_id_from=333.1007.0.0"><article class="social_media_article"><img src="assets/img/icons/bilibili.svg"style="width:60%;padding-top:0.4em;"></article></a>
+        <a target="_blank" class="social_media"href="https://twitter.com/Kubai087"><article class="social_media_article"><img src="assets/img/icons/twitter.svg"style="width:65%;padding-top:0.37em;"></article></a>
+        <a target="_blank" class="social_media"href="https://www.behance.net/chenmudw"><article class="social_media_article"><img src="assets/img/icons/behance.svg"style="width:68%;padding-top:0.34em;"></article></a>
+      </section>
+    </div>
+    <!-- 右边的轮播 banner 图 -->
+    <div class="<col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xl-8">
+
+      <div class="card mb-3" style="width: 100%;">
+        <img class="card-img-top" src="assets/img/topic_1.jpg" alt="Alaya [ 阿赖耶识 ] 游戏UI设计（个人作品）">
+        <div class="card-body">
+          <h5 class="card-title"><span style="padding-top:7px;"class="badge badge-danger">置顶</span> Alaya [ 阿赖耶识 ] 游戏UI设计（个人作品）</h5>
+          <p class="card-text card-text-works">© 枯白设计 2021 “破壁力” 游戏UI初尝试，制作时长两周。</p>
+          <p class="card-text" style="padding-top: 2.5em;"><small class="text-muted">#UI设计 #GAME_UI</small></p>
+    </div>
+  </div>
+
+  </div>
+
+</div>
+</div>
+
+<!-- 固定背景图 -->
+<figure id="figure_background">
+		<div id="fixed">
+		</div>
+</figure>
+
+<!-- 第二个自适应卡片模块-->
+<div class="container-fluid">
+  <div class="row">
+    <div class="<col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+      <p class="left_profile_content the_title" >作品 WORKS</p>
+      <hr />
+    </div>
+  </div>
+  <div class="row">
+    <!-- 这是一个卡片 -->
+    <!-- 下面的 height 减去 card.css 中.card_works 组中的 height 数值（17em）为自适应下每行卡片的行间距 -->
+    <div class="<col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-3" style="height: 29.5em;">
+      <div class="a_card" href="#" style="text-decoration: none;">
+        <div class="card">
+        <!-- 网上找到的 CSS hover缩放 -->
+        <figure class="card_works" id="card_image_1">
+          <div class="date"><span class="card-date-day">20</span><span class="card-date-month">APR</span></div>
+          <figcaption class="fig_card_works">
+            <div class="">
+
+            </div>
+            <h4></h4>
+          </figcaption>
+        </figure>
+        <!-- 和 boostrap中的card进行缝合 -->
+        <div class="card-body">
+          <a href="#" class="a_card" style="text-decoration: none;">
+            <h4 class="card-title card-works">尔坂 x 我的世界-游戏视觉项目</h4>
+            <p class="card-text card-text-works">基于 Minecraft 我的世界私服系统开发的尔坂服务器（Urbane）所制作的视觉包装</p>
+          </a>
+          <p class="card-text" style="padding-top: 2.5em;"><small class="text-muted"">#平面设计 #品牌视觉</small></p>
+        </div>
+        </div>
+     </div>
+    </div>
+
+    <!-- 这是一个卡片 -->
+    <div class="<col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-3" style="height: 28em;">
+      <div class="a_card" href="#" style="text-decoration: none;">
+        <div class="card">
+        <!-- 网上找到的 CSS hover缩放 -->
+        <figure class="card_works" id="card_image_2">
+          <div class="date"><span class="card-date-day">18</span><span class="card-date-month">MAR</span></div>
+          <figcaption class="fig_card_works">
+            <div class="">
+
+            </div>
+            <h4></h4>
+          </figcaption>
+        </figure>
+        <!-- 和 boostrap中的card进行缝合 -->
+        <div class="card-body">
+          <a href="#" class="a_card" style="text-decoration: none;">
+            <h4 class="card-title card-works">小狮子 RASTACLAT 品牌海报</h4>
+            <p class="card-text card-text-works">中传广告学院2020级新生比稿会“神探艾德曼”参赛作品 品牌方：RASTACLAT（小狮子手链）主题：Seek the positive</p>
+          </a>
+          <p class="card-text" style="padding-top: 2.5em;"><small class="text-muted"">#平面设计 #海报招贴</small></p>
+        </div>
+        </div>
+     </div>
+    </div>
+
+    <!-- 这是一个卡片 -->
+    <div class="<col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-3" style="height: 28em;">
+      <div class="a_card" href="#" style="text-decoration: none;">
+        <div class="card">
+        <!-- 网上找到的 CSS hover缩放 -->
+        <figure class="card_works" id="card_image_3">
+          <div class="date"><span class="card-date-day">10</span><span class="card-date-month">MAR</span></div>
+          <figcaption class="fig_card_works">
+            <div class="">
+
+            </div>
+            <h4></h4>
+          </figcaption>
+        </figure>
+        <!-- 和 boostrap中的card进行缝合 -->
+        <div class="card-body">
+          <a href="#" class="a_card" style="text-decoration: none;">
+            <h4 class="card-title card-works">《月亮曲奇》游戏标志设计</h4>
+            <p class="card-text card-text-works">月亮曲奇》游戏标志设计</p>
+          </a>
+          <p class="card-text" style="padding-top: 2.5em;"><small class="text-muted"">#平面设计 #LOGO设计</small></p>
+        </div>
+        </div>
+     </div>
+    </div>
+
+    <!-- 这是一个卡片 -->
+    <div class="<col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-3" style="height: 28em;">
+      <div class="a_card" href="#" style="text-decoration: none;">
+        <div class="card">
+        <!-- 网上找到的 CSS hover缩放 -->
+        <figure class="card_works" id="card_image_4">
+          <div class="date"><span class="card-date-day">31</span><span class="card-date-month">FEB</span></div>
+          <figcaption class="fig_card_works">
+            <div class="">
+
+            </div>
+            <h4></h4>
+          </figcaption>
+        </figure>
+        <!-- 和 boostrap中的card进行缝合 -->
+        <div class="card-body">
+          <a href="#" class="a_card" style="text-decoration: none;">
+            <h4 class="card-title card-works">《TAMA 天马-假想国潮品牌设计</h4>
+            <p class="card-text card-text-works">一些关于“扁平”、“国潮”的偶然畅想</p>
+          </a>
+          <p class="card-text" style="padding-top: 2.5em;"><small class="text-muted"">#平面设计 #品牌设计</small></p>
+        </div>
+        </div>
+     </div>
+    </div>
+
+    <!-- 这是一个卡片 -->
+    <div class="<col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-3" style="height: 29.5em;">
+      <div class="a_card" href="#" style="text-decoration: none;">
+        <div class="card">
+        <!-- 网上找到的 CSS hover缩放 -->
+        <figure class="card_works" id="card_image_5">
+          <div class="date"><span class="card-date-day">12</span><span class="card-date-month">FEB</span></div>
+          <figcaption class="fig_card_works">
+            <div class="">
+
+            </div>
+            <h4></h4>
+          </figcaption>
+        </figure>
+        <!-- 和 boostrap中的card进行缝合 -->
+        <div class="card-body">
+          <a href="#" class="a_card" style="text-decoration: none;">
+            <h4 class="card-title card-works">《Purtmars》RPG 游戏 logo 设计</h4>
+            <p class="card-text card-text-works">哥特风游戏logo尝试</p>
+          </a>
+          <p class="card-text" style="padding-top: 2.5em;"><small class="text-muted"">#平面设计 #LOGO设计</small></p>
+        </div>
+        </div>
+     </div>
+    </div>
+
+    <!-- 这是一个卡片 -->
+    <div class="<col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-3" style="height: 28em;">
+      <div class="a_card" href="#" style="text-decoration: none;">
+        <div class="card">
+        <!-- 网上找到的 CSS hover缩放 -->
+        <figure class="card_works" id="card_image_6">
+          <div class="date"><span class="card-date-day">16</span><span class="card-date-month">MAR</span></div>
+          <figcaption class="fig_card_works">
+            <div class="">
+
+            </div>
+            <h4></h4>
+          </figcaption>
+        </figure>
+        <!-- 和 boostrap中的card进行缝合 -->
+        <div class="card-body">
+          <a href="#" class="a_card" style="text-decoration: none;">
+            <h4 class="card-title card-works">游戏标志约稿作品集【2020-3月上旬】</h4>
+            <p class="card-text card-text-works">常做常新</p>
+          </a>
+          <p class="card-text" style="padding-top: 2.5em;"><small class="text-muted"">#平面设计 #LOGO设计</small></p>
+        </div>
+        </div>
+     </div>
+    </div>
+
+    <!-- 这是一个卡片 -->
+    <div class="<col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-3" style="height: 28em;">
+      <div class="a_card" href="#" style="text-decoration: none;">
+        <div class="card">
+        <!-- 网上找到的 CSS hover缩放 -->
+        <figure class="card_works" id="card_image_7">
+          <div class="date"><span class="card-date-day">13</span><span class="card-date-month">MAR</span></div>
+          <figcaption class="fig_card_works">
+            <div class="">
+
+            </div>
+            <h4></h4>
+          </figcaption>
+        </figure>
+        <!-- 和 boostrap中的card进行缝合 -->
+        <div class="card-body">
+          <a href="#" class="a_card" style="text-decoration: none;">
+            <h4 class="card-title card-works">《艾尔之光》周边 logo 设计</h4>
+            <p class="card-text card-text-works">“切割与碰撞”</p>
+          </a>
+          <p class="card-text" style="padding-top: 2.5em;"><small class="text-muted"">#平面设计 #LOGO设计</small></p>
+        </div>
+        </div>
+     </div>
+    </div>
+
+    <!-- 这是一个卡片 -->
+    <div class="<col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-3" style="height: 28em;">
+      <div class="a_card" href="#" style="text-decoration: none;">
+        <div class="card">
+        <!-- 网上找到的 CSS hover缩放 -->
+        <figure class="card_works" id="card_image_8">
+          <div class="date"><span class="card-date-day">29</span><span class="card-date-month">FEB</span></div>
+          <figcaption class="fig_card_works">
+            <div class="">
+
+            </div>
+            <h4></h4>
+          </figcaption>
+        </figure>
+        <!-- 和 boostrap中的card进行缝合 -->
+        <div class="card-body">
+          <a href="#" class="a_card" style="text-decoration: none;">
+            <h4 class="card-title card-works">游戏标志约稿作品集【2020-1月-2月】</h4>
+            <p class="card-text card-text-works">常做常新</p>
+          </a>
+          <p class="card-text" style="padding-top: 2.5em;"><small class="text-muted"">#平面设计 #LOGO设计</small></p>
+        </div>
+        </div>
+     </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="tip_middle">
+  <p>持续更新中......</p>
+</div>
+<!-- footer 项目地址：https://bootsnipp.com/snippets/M56El-->
+<footer class="container-fluid bg-grey py-5">
+<div class="container">
+   <div class="row">
+      <div class="col-md-6">
+         <div class="row">
+            <div class="col-md-6 " style="padding-bottom:5em;">
+               <div class="logo-part">
+                  <img src="assets/img/logo_all_grey.png" style="width:90%;max-width: 10em">
+                  <p class="p_footer"></p>
+                  <p class="p_footer" style="font-size:16px; width:90%;">Kubai Designs 枯白设计</p>
+                  <p class="p_footer" style="font-size:13px; width:90%;">“设计是化繁为简、化腐朽为神奇、化无聊为有趣。”</p>
+               </div>
+            </div>
+            <div class="col-md-6 px-4" style="padding-bottom:5em;">
+               <h6> ©️ 版权声明</h6>
+               <p class="p_footer" style="font-size:13px;">本网页基于 Github Evironment环境搭建。采用 bootstrap 框架编写。部分组件引用自网络，已在源码中注明。</p>
+               <a href="https://github.com/kubai087/kubai087.github.io" target="_blank" class="btn-footer a_footer"> 项目地址</a><br>
+            </div>
+         </div>
+      </div>
+      <div class="col-md-6">
+         <div class="row">
+            <div class="col-md-6" style="padding-bottom:5em;">
+               <h6>联系我</h6>
+               <!-- 社交媒体icon -->
+               <section class="ss-icon">
+                 <a target="_blank" class="social_media"href="https://chenmudw.zcool.com.cn"><article class="social_media_article"><img src="assets/img/icons/zcool.svg"style="width:67%;padding-top:0.3em;"></article></a>
+                 <a target="_blank" class="social_media"href="https://space.bilibili.com/39590158?spm_id_from=333.1007.0.0"><article class="social_media_article"><img src="assets/img/icons/bilibili.svg"style="width:60%;padding-top:0.4em;"></article></a>
+                 <a target="_blank" class="social_media"href="https://twitter.com/Kubai087"><article class="social_media_article"><img src="assets/img/icons/twitter.svg"style="width:65%;padding-top:0.37em;"></article></a>
+                 <a target="_blank" class="social_media"href="https://www.behance.net/chenmudw"><article class="social_media_article"><img src="assets/img/icons/behance.svg"style="width:68%;padding-top:0.34em;"></article></a>
+                 <a target="_blank" class="social_media"href="assets/img/wechat_qrcode.jpg"><article class="social_media_article"><img src="assets/img/icons/wechat.svg"style="width:65%;padding-top:0.34em;"></article></a>
+                 <a target="_blank" class="social_media"href="https://weibo.com/chenmudw"><article class="social_media_article"><img src="assets/img/icons/weibo.svg"style="width:70%;padding-top:0.3em;"></article></a>
+                 <a target="_blank" class="social_media"href="https://huaban.com/user/chenmudw"><article class="social_media_article"><img src="assets/img/icons/huaban.svg"style="width:54%;padding-top:0.5em;"></article></a>
+               </section>
+               <p class="p_footer"></p>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+</footer>
