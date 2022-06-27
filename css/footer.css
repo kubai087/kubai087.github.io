@@ -14,6 +14,8 @@
 }
 .p_footer{
      font-size: 12px;
+     text-decoration: none;
+     color: #7F7F7F;
 }
 footer h6 {
    font-family: 'Playfair Display', serif;
