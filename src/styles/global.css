@@ -13,7 +13,11 @@
   --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", "PingFang SC", "Hiragino Sans GB",
     "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
   --serif: "Instrument Serif", "Songti SC", "Noto Serif CJK SC", Georgia, serif;
-  --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+
+  /* Three sizes for the whole site: the name, body, and small print. */
+  --text-display: clamp(34px, 4.4vw, 44px);
+  --text: 15px;
+  --text-small: 13px;
 
   --gutter: clamp(20px, 4vw, 40px);
   --shell: min(1080px, calc(100% - var(--gutter) * 2));
@@ -51,7 +55,7 @@ body {
   background: var(--bg);
   color: var(--ink);
   font-family: var(--sans);
-  font-size: 16px;
+  font-size: var(--text);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -140,8 +144,7 @@ button {
 }
 
 .brand {
-  font-size: 15px;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .brand span {
@@ -149,13 +152,12 @@ button {
   font-family: var(--serif);
   font-style: italic;
   font-weight: 400;
-  font-size: 17px;
+  font-size: 1.1em;
   color: var(--ink-3);
 }
 
 .lang-switch {
-  font-family: var(--mono);
-  font-size: 13px;
+  font-size: var(--text-small);
   color: var(--ink-3);
   transition: color 0.2s;
 }
@@ -211,10 +213,10 @@ button {
 
 .hero-title {
   margin: 0;
-  font-size: clamp(40px, 6vw, 60px);
-  line-height: 1.05;
-  font-weight: 600;
-  letter-spacing: -0.02em;
+  font-size: var(--text-display);
+  line-height: 1.1;
+  font-weight: 500;
+  letter-spacing: -0.015em;
 }
 
 .hero-title span {
@@ -227,25 +229,22 @@ button {
   color: var(--ink-3);
 }
 
+/* Instrument Serif sits small for its size; 1.15em matches the sans name's weight on the page. */
 :lang(en) .hero-title {
   font-family: var(--serif);
   font-weight: 400;
-  font-size: clamp(48px, 7vw, 72px);
-  letter-spacing: -0.01em;
+  font-size: calc(var(--text-display) * 1.15);
+  letter-spacing: -0.005em;
 }
 
 .hero-role {
-  margin: 14px 0 0;
-  font-family: var(--mono);
-  font-size: 12.5px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  margin: 12px 0 0;
+  font-size: var(--text-small);
   color: var(--ink-3);
 }
 
 .hero-line {
-  margin: 10px 0 0;
-  font-size: 17px;
+  margin: 4px 0 0;
   color: var(--ink-2);
 }
 
@@ -266,12 +265,10 @@ button {
   position: sticky;
   top: 88px;
   margin: 0;
-  padding-top: 24px;
-  font-family: var(--mono);
-  font-size: 12.5px;
+  padding-top: 18px;
+  font-size: var(--text-small);
   font-weight: 400;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  line-height: inherit;
   color: var(--ink-3);
 }
 
@@ -289,7 +286,7 @@ button {
   align-items: baseline;
   gap: 16px;
   width: 100%;
-  padding: 22px 0;
+  padding: 18px 0;
   border: 0;
   border-top: 1px solid var(--line);
   background: none;
@@ -304,17 +301,15 @@ button {
 
 .row-index {
   grid-area: index;
-  font-family: var(--mono);
-  font-size: 12.5px;
+  font-size: var(--text-small);
+  font-variant-numeric: tabular-nums;
   color: var(--ink-3);
   transition: color 0.2s;
 }
 
 .row-title {
   grid-area: title;
-  font-size: 20px;
-  font-weight: 550;
-  letter-spacing: -0.01em;
+  font-weight: 500;
 }
 
 .row-meta {
@@ -380,7 +375,7 @@ button {
 .footer {
   margin-top: clamp(120px, 16vw, 200px);
   padding: 24px 0 calc(32px + env(safe-area-inset-bottom));
-  font-size: 12.5px;
+  font-size: var(--text-small);
   color: var(--ink-3);
 }
 
@@ -443,8 +438,8 @@ button {
 
 .qr-title {
   margin: 0 0 20px;
-  font-size: 17px;
-  font-weight: 600;
+  font-size: var(--text);
+  font-weight: 500;
 }
 
 .qr-dialog img {
@@ -455,7 +450,7 @@ button {
 
 .qr-note {
   margin: 16px 0 0;
-  font-size: 14px;
+  font-size: var(--text-small);
   color: var(--ink-3);
 }
 
@@ -518,16 +513,7 @@ button {
       ". meta trail"
       ". note trail";
     gap: 2px 12px;
-    padding: 18px 0;
-  }
-
-  .row-title {
-    font-size: 18px;
-  }
-
-  .row-meta,
-  .row-note {
-    font-size: 15px;
+    padding: 16px 0;
   }
 }
 
