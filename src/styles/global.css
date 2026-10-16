@@ -9,8 +9,6 @@
   --line: rgba(20, 20, 20, 0.1);
   --particle: #141414;
   --particle-paper: #fbfbfb;
-  /* The flower's red: the page's only accent. */
-  --accent: #e3302b;
 
   --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", "PingFang SC", "Hiragino Sans GB",
     "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
@@ -33,7 +31,6 @@
     /* A black cat stays dark on a dark page; its eyes carry the light. */
     --particle: #5a5a61;
     --particle-paper: #f4f4f4;
-    --accent: #ff5a4f;
   }
 }
 
@@ -78,7 +75,7 @@ button {
 }
 
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--ink);
   outline-offset: 3px;
   border-radius: 6px;
 }
@@ -205,11 +202,12 @@ button {
   height: auto;
   aspect-ratio: 1;
   border-radius: 22%;
-  transition: opacity 0.7s var(--ease);
 }
 
-.hero.is-live .hero-avatar {
-  opacity: 0;
+/* When the particles will draw the cat, the image only holds its place (and
+   comes back if WebGL or the script fails). */
+.hero-motion .hero-avatar {
+  visibility: hidden;
 }
 
 .hero-label {
@@ -335,11 +333,13 @@ button {
 .row-meta {
   grid-area: meta;
   color: var(--ink-3);
+  transition: color 0.2s;
 }
 
 .row-note {
   grid-area: note;
   color: var(--ink-2);
+  transition: color 0.2s;
 }
 
 .row-trail {
@@ -357,8 +357,10 @@ button {
 }
 
 .row:hover .row-index,
+.row:hover .row-meta,
+.row:hover .row-note,
 .row:hover .row-trail {
-  color: var(--accent);
+  color: var(--ink);
 }
 
 .row:hover .row-trail {

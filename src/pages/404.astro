@@ -1,0 +1,52 @@
+---
+// GitHub Pages serves this for every missing address. It stays out of search
+// results and points both languages home.
+import "../styles/global.css";
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex,follow" />
+    <title>页面不存在 · Page not found · 枯白啃设计 Kubai 087</title>
+    <link rel="icon" href="/favicon.png" type="image/png" sizes="96x96" />
+  </head>
+  <body>
+    <main class="not-found">
+      <p class="hero-role">404</p>
+      <h1 class="hero-title">页面不存在</h1>
+      <p class="hero-line" lang="en">This page doesn't exist.</p>
+      <p class="not-found-links">
+        <a href="/">回到首页</a>
+        <a href="/en/" lang="en">Back home</a>
+      </p>
+    </main>
+  </body>
+</html>
+
+<style>
+  .not-found {
+    display: grid;
+    place-content: center;
+    min-height: 100svh;
+    padding: 24px;
+    text-align: center;
+  }
+
+  .not-found-links {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 32px;
+  }
+
+  .not-found-links a {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .not-found-links a:hover {
+    border-color: var(--ink);
+  }
+</style>

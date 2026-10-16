@@ -35,3 +35,7 @@ jobs:
           path: dist
       - id: deployment
         uses: actions/deploy-pages@v4
+      - name: Notify IndexNow
+        # Search indexing must never fail a deploy.
+        continue-on-error: true
+        run: node scripts/submit-indexnow.mjs dist/sitemap-0.xml

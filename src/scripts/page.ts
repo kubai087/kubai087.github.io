@@ -1,7 +1,6 @@
 /*
  * Page behaviour: the sticky header's scrolled state, copy-to-clipboard,
- * the WeChat dialog, scroll reveals, and loading the hero particles once the
- * first paint is done.
+ * the WeChat dialog, scroll reveals, and starting the hero particles.
  */
 
 export function initPage() {
@@ -87,18 +86,16 @@ function scheduleHero() {
   const canvas = hero?.querySelector<HTMLCanvasElement>("[data-hero-canvas]");
   const target = hero?.querySelector<HTMLImageElement>("[data-hero-target]");
   if (!hero || !canvas || !target) return;
-  // The avatar image already reads as the design; motion is an enhancement.
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-  if (!supportsWebGL()) return;
+  // The avatar image already reads as the design; motion is an enhancement. The
+  // head script hides the image (html.hero-motion) only when motion is welcome,
+  // and any failure here shows it again.
+  const root = document.documentElement;
+  if (!root.classList.contains("hero-motion")) return;
+  const fallBack = () => root.classList.remove("hero-motion");
+  if (!supportsWebGL()) return fallBack();
 
-  const start = () =>
-    import("./hero-particles")
-      .then(({ startHeroParticles }) => startHeroParticles({ hero, canvas, target }))
-      .catch(() => hero.classList.remove("is-live"));
-
-  // A busy page may never go idle, so the timeout caps the wait.
-  const idle = () =>
-    window.requestIdleCallback ? window.requestIdleCallback(start, { timeout: 1200 }) : window.setTimeout(start, 200);
-  if (document.readyState === "complete") idle();
-  else window.addEventListener("load", idle, { once: true });
+  // Start right away: the cat should gather out of the dust, not swap in for an image.
+  import("./hero-particles")
+    .then(({ startHeroParticles }) => startHeroParticles({ hero, canvas, target }))
+    .catch(fallBack);
 }

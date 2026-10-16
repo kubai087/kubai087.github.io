@@ -11,6 +11,9 @@ export default defineConfig({
   },
   integrations: [
     sitemap({
+      // Pages only deploy when they change, so the build time is their last edit.
+      lastmod: new Date(),
+      filter: (page) => !page.includes("/404"),
       i18n: {
         defaultLocale: "zh-CN",
         locales: { "zh-CN": "zh-CN", en: "en" },

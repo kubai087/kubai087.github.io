@@ -17,9 +17,7 @@ const otherLocale: Locale = isZh ? "en" : "zh-CN";
 const year = new Date().getFullYear();
 
 const works = [
-  { id: "lumno", row: t.works.lumno, href: isZh ? LUMNO.siteZh : LUMNO.siteEn, external: false },
-  { id: "x", row: t.works.x, href: SOCIAL.x.url, external: true },
-  { id: "xiaohongshu", row: t.works.xiaohongshu, href: SOCIAL.xiaohongshu.url, external: true },
+  { row: t.works.lumno, href: isZh ? LUMNO.siteZh : LUMNO.siteEn, external: false },
 ] as const;
 
 const contactOrder: SocialId[] = ["email", "wechat", "xiaohongshu", "x", "bonjour", "vibecafe"];
@@ -61,7 +59,6 @@ const contactHref: Partial<Record<SocialId, string>> = {
           class="hero-avatar"
           data-hero-target
           loading="eager"
-          fetchpriority="high"
         />
       </div>
 
@@ -179,7 +176,7 @@ const contactHref: Partial<Record<SocialId, string>> = {
       <button class="qr-close" aria-label={t.contact.close}><Icon name="close" /></button>
     </form>
     <h2 class="qr-title" id="wechat-title">{t.contact.wechatTitle}</h2>
-    <img src="/img/wechat-qrcode.jpg" alt={t.contact.wechatAlt} width="300" height="382" loading="lazy" decoding="async" />
+    <img src="/img/wechat-qrcode-20261016.jpg" alt={t.contact.wechatAlt} width="300" height="382" loading="lazy" decoding="async" />
     <p class="qr-note">{t.contact.wechatNote}</p>
   </dialog>
 </Base>

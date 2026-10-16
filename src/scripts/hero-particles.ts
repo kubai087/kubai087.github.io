@@ -1,7 +1,6 @@
 /*
- * Hero particles: the avatar dissolves into a cloud of points that settles back
- * into the cat, scatters around the pointer, and drifts apart as the hero
- * scrolls away.
+ * Hero particles: a cloud of points that gathers into the cat avatar, scatters
+ * around the pointer, and drifts apart as the hero scrolls away.
  *
  * Points are sampled from public/img/avatar-mask.png, where each pixel's flat
  * colour names a part of the cat (scripts/make-avatar-assets.mjs). The body
@@ -261,8 +260,8 @@ export async function startHeroParticles({ hero, canvas, target }: Options) {
     renderOnce();
   }).observe(hero);
 
-  // Start as a loose cloud around the avatar, so the image seems to dissolve and resettle.
-  const spread = box0.size * 0.22;
+  // Start as a wide cloud around the avatar's place, so the cat gathers out of it.
+  const spread = box0.size * 0.5;
   for (let i = 0; i < count; i++) {
     const r = spread * Math.sqrt(-2 * Math.log(rand() + 1e-6));
     const a = rand() * Math.PI * 2;
@@ -374,6 +373,5 @@ export async function startHeroParticles({ hero, canvas, target }: Options) {
   }).observe(hero);
   document.addEventListener("visibilitychange", sync);
 
-  hero.classList.add("is-live");
   sync();
 }

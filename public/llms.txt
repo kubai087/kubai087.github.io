@@ -1,0 +1,23 @@
+# Kubai 087（枯白啃设计）
+
+Kubai 087 (Chinese name 枯白啃设计, handle kubai087) is an app icon designer who also builds their own products. The best known is Lumno, an open-source browser command bar and minimalist new tab for Chrome, Edge and Firefox.
+
+## Work
+
+- Lumno: open-source browser command bar (tab, bookmark, history and site search) and minimalist new tab. Site: https://lumno.kubai.design/ (English: https://lumno.kubai.design/en/). Source: https://github.com/kubai087/lumno-extension
+- App icon work and icon design tutorials, in Chinese, on Xiaohongshu: https://www.xiaohongshu.com/user/profile/5f30130300000000010006eb
+
+## Pages
+
+- Homepage (Simplified Chinese): https://www.kubai.design/
+- Homepage (English): https://www.kubai.design/en/
+
+## Contact and profiles
+
+- Email: i@kubai.design
+- X: https://x.com/kubai087
+- Xiaohongshu (小红书): https://www.xiaohongshu.com/user/profile/5f30130300000000010006eb
+- Bonjour!: https://bonjour.bio/pvx7hk
+- Vibe Cafe: https://vibecafe.ai/@kubai087
+- GitHub: https://github.com/kubai087
+- WeChat: QR code on the homepage

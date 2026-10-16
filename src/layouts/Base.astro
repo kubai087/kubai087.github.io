@@ -12,7 +12,7 @@ interface Props {
 const { locale } = Astro.props;
 const t = COPY[locale];
 const canonical = new URL(localePath(locale), SITE_URL).toString();
-const ogImage = new URL("/og.png", SITE_URL).toString();
+const ogImage = new URL("/og-20261016.png", SITE_URL).toString();
 const avatar = new URL("/avatar.png", SITE_URL).toString();
 const isZh = locale === "zh-CN";
 
@@ -38,11 +38,11 @@ const jsonLd = {
       url: `${SITE_URL}/`,
       image: avatar,
       email: `mailto:${EMAIL}`,
-      jobTitle: isZh ? "UX 设计师" : "UX Designer",
+      jobTitle: isZh ? "App 图标设计师" : "App Icon Designer",
       description: t.seo.description,
       knowsAbout: isZh
-        ? ["用户体验设计", "交互设计", "产品设计", "前端开发", "浏览器扩展"]
-        : ["UX design", "Interaction design", "Product design", "Front-end development", "Browser extensions"],
+        ? ["App 图标设计", "图标设计教程", "UI 设计", "产品设计", "浏览器扩展"]
+        : ["App icon design", "Icon design tutorials", "UI design", "Product design", "Browser extensions"],
       sameAs: SAME_AS,
       owns: { "@id": LUMNO.appId },
     },
@@ -82,6 +82,9 @@ const jsonLd = {
     <meta name="keywords" content={t.seo.keywords.join(",")} />
     <meta name="author" content={isZh ? "枯白啃设计 Kubai 087" : "Kubai 087 (枯白啃设计)"} />
     <meta name="robots" content="index,follow,max-image-preview:large" />
+    {/* Account-level tokens shared with lumno.kubai.design's Search Console and Bing Webmaster setup. */}
+    <meta name="google-site-verification" content="HKqiGCjthnY09aT_4J3N0wyp3vdB7YKtuh0h2Epikt0" />
+    <meta name="msvalidate.01" content="723A1E0B63BD9250E3870243A40861A4" />
     <meta name="color-scheme" content="light dark" />
     <meta name="theme-color" content="#fbfbfb" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#0b0b0c" media="(prefers-color-scheme: dark)" />
@@ -115,9 +118,15 @@ const jsonLd = {
     <link rel="icon" href="/favicon.png" type="image/png" sizes="96x96" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt" />
     <link rel="me" href="https://x.com/kubai087" />
     <link rel="me" href="https://github.com/kubai087" />
 
+    <script is:inline>
+      // Hide the hero avatar before first paint when the particles will draw it instead.
+      if (!matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("hero-motion");
+    </script>
+    <link rel="preload" href="/img/avatar-mask.png" as="image" type="image/png" />
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
     <script defer src="https://track.0http.com/script.js" data-website-id="a7bfbd0a-88f3-4258-86b7-c86a19be28f8"></script>
   </head>
