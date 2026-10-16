@@ -17,7 +17,7 @@ type Copy = {
   skip: string;
   home: string;
   language: { switchTo: string; switchLabel: string };
-  hero: { name: string; latin: string; role: string; line: string; avatarAlt: string };
+  hero: { name: string; /** A second name beside the first; the English page has none. */ latin?: string; role: string; line: string; avatarAlt: string };
   works: { label: string; lumno: Row };
   contact: {
     label: string;
@@ -87,7 +87,6 @@ export const COPY: Record<Locale, Copy> = {
     language: { switchTo: "中文", switchLabel: "切换到简体中文" },
     hero: {
       name: "Kubai 087",
-      latin: "枯白啃设计",
       role: "Icon Designer · Builder",
       line: "An icon designer, also building my own products.",
       avatarAlt: "Kubai 087's avatar: a black cat wearing a red flower",

@@ -153,12 +153,6 @@ button {
   color: var(--ink-3);
 }
 
-:lang(en) .brand span {
-  font-family: var(--sans);
-  font-style: normal;
-  font-size: 14px;
-}
-
 .lang-switch {
   font-family: var(--mono);
   font-size: 13px;
@@ -238,13 +232,6 @@ button {
   font-weight: 400;
   font-size: clamp(48px, 7vw, 72px);
   letter-spacing: -0.01em;
-}
-
-:lang(en) .hero-title span {
-  font-family: var(--sans);
-  font-style: normal;
-  font-size: 0.42em;
-  font-weight: 500;
 }
 
 .hero-role {

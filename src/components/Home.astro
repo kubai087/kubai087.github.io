@@ -35,7 +35,7 @@ const contactHref: Partial<Record<SocialId, string>> = {
   <header class="topbar" data-topbar>
     <div class="shell topbar-inner">
       <a class="brand" href={localePath(locale)} aria-label={t.home}>
-        {t.hero.name}<span>{t.hero.latin}</span>
+        {t.hero.name}{t.hero.latin && <span>{t.hero.latin}</span>}
       </a>
       <a
         class="lang-switch"
@@ -64,7 +64,7 @@ const contactHref: Partial<Record<SocialId, string>> = {
 
       <div class="hero-label">
         <h1 class="hero-title" id="hero-title">
-          {t.hero.name}<span lang={isZh ? "en" : "zh-CN"}>{t.hero.latin}</span>
+          {t.hero.name}{t.hero.latin && <span lang="en">{t.hero.latin}</span>}
         </h1>
         <p class="hero-role">{t.hero.role}</p>
         <p class="hero-line">{t.hero.line}</p>
