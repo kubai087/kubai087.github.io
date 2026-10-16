@@ -2,12 +2,15 @@
  * Builds every avatar-derived file from src/assets/avatar-source.webp:
  *   public/avatar.png            512px, for the Person schema and links
  *   public/apple-touch-icon.png  180px
- *   public/favicon.png           96px, rounded
+ *   public/favicon-20261016.png  96px, rounded (versioned; see below)
+ *   public/favicon.ico           48px, rounded
+ *   public/icon-192.png          192px, rounded, for the web manifest
  *   public/img/avatar-mask.png   the particle map: each pixel is one flat colour
  *                                naming a part of the cat (see PARTS), or transparent
  *
  * Run after changing the avatar: node scripts/make-avatar-assets.mjs
  */
+import fs from "node:fs/promises";
 import sharp from "sharp";
 
 const SOURCE = "src/assets/avatar-source.webp";
@@ -26,12 +29,37 @@ const PARTS = {
 await sharp(SOURCE).resize(512).png({ compressionLevel: 9 }).toFile("public/avatar.png");
 await sharp(SOURCE).resize(180).png({ compressionLevel: 9 }).toFile("public/apple-touch-icon.png");
 
-const round = Buffer.from('<svg width="96" height="96"><rect width="96" height="96" rx="22" fill="#fff"/></svg>');
-await sharp(SOURCE)
-  .resize(96)
-  .composite([{ input: round, blend: "dest-in" }])
-  .png({ compressionLevel: 9 })
-  .toFile("public/favicon.png");
+// Versioned names: the old site served a different icon at /favicon.png, and
+// browsers and Google keep favicons for a long time.
+const roundedIcon = (size) =>
+  sharp(SOURCE)
+    .resize(size)
+    .composite([
+      {
+        input: Buffer.from(`<svg width="${size}" height="${size}"><rect width="${size}" height="${size}" rx="${size * 0.23}" fill="#fff"/></svg>`),
+        blend: "dest-in",
+      },
+    ])
+    .png({ compressionLevel: 9 })
+    .toBuffer();
+
+await fs.writeFile("public/favicon-20261016.png", await roundedIcon(96));
+await fs.writeFile("public/icon-192.png", await roundedIcon(192));
+
+// favicon.ico for crawlers and browsers that ask for it directly: one 48px PNG
+// wrapped in an ICO header (PNG-in-ICO is valid since Windows Vista).
+const ico48 = await roundedIcon(48);
+const header = Buffer.alloc(22);
+header.writeUInt16LE(0, 0); // reserved
+header.writeUInt16LE(1, 2); // type: icon
+header.writeUInt16LE(1, 4); // one image
+header.writeUInt8(48, 6); // width
+header.writeUInt8(48, 7); // height
+header.writeUInt16LE(1, 10); // colour planes
+header.writeUInt16LE(32, 12); // bits per pixel
+header.writeUInt32LE(ico48.length, 14);
+header.writeUInt32LE(22, 18); // image offset
+await fs.writeFile("public/favicon.ico", Buffer.concat([header, ico48]));
 
 const { data, info } = await sharp(SOURCE)
   .resize(MASK_SIZE, MASK_SIZE, { kernel: "lanczos3" })
