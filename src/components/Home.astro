@@ -1,0 +1,190 @@
+---
+import { Image } from "astro:assets";
+import Base from "../layouts/Base.astro";
+import Icon from "./Icon.astro";
+import avatar from "../assets/avatar-source.webp";
+import { COPY, localePath, type Locale } from "../lib/content";
+import { EMAIL, LUMNO, SOCIAL, type SocialId } from "../lib/links";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = COPY[locale];
+const isZh = locale === "zh-CN";
+const otherLocale: Locale = isZh ? "en" : "zh-CN";
+const year = new Date().getFullYear();
+
+const works = [
+  { id: "lumno", row: t.works.lumno, href: isZh ? LUMNO.siteZh : LUMNO.siteEn, external: false },
+  { id: "x", row: t.works.x, href: SOCIAL.x.url, external: true },
+  { id: "xiaohongshu", row: t.works.xiaohongshu, href: SOCIAL.xiaohongshu.url, external: true },
+] as const;
+
+const contactOrder: SocialId[] = ["email", "wechat", "xiaohongshu", "x", "bonjour", "vibecafe"];
+const contactHref: Partial<Record<SocialId, string>> = {
+  xiaohongshu: SOCIAL.xiaohongshu.url,
+  x: SOCIAL.x.url,
+  bonjour: SOCIAL.bonjour.url,
+  vibecafe: SOCIAL.vibecafe.url,
+};
+---
+
+<Base locale={locale}>
+  <a class="skip-link" href="#main">{t.skip}</a>
+
+  <header class="topbar" data-topbar>
+    <div class="shell topbar-inner">
+      <a class="brand" href={localePath(locale)} aria-label={t.home}>
+        {t.hero.name}<span>{t.hero.latin}</span>
+      </a>
+      <a
+        class="lang-switch"
+        href={localePath(otherLocale)}
+        hreflang={COPY[otherLocale].htmlLang}
+        lang={COPY[otherLocale].htmlLang}
+        aria-label={t.language.switchLabel}>{t.language.switchTo}</a
+      >
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" data-hero aria-labelledby="hero-title">
+      <canvas class="hero-canvas" data-hero-canvas aria-hidden="true"></canvas>
+      <div class="hero-figure">
+        <Image
+          src={avatar}
+          alt={t.hero.avatarAlt}
+          widths={[320, 480, 720]}
+          sizes="(min-width: 720px) 400px, 64vw"
+          class="hero-avatar"
+          data-hero-target
+          loading="eager"
+          fetchpriority="high"
+        />
+      </div>
+
+      <div class="hero-label">
+        <h1 class="hero-title" id="hero-title">
+          {t.hero.name}<span lang={isZh ? "en" : "zh-CN"}>{t.hero.latin}</span>
+        </h1>
+        <p class="hero-role">{t.hero.role}</p>
+        <p class="hero-line">{t.hero.line}</p>
+      </div>
+    </section>
+
+    <section class="index" id="work" aria-labelledby="work-label">
+      <div class="shell index-inner">
+        <h2 class="index-label" id="work-label">{t.works.label}</h2>
+        <ul class="rows" role="list">
+          {
+            works.map(({ row, href, external }, n) => (
+              <li class="reveal">
+                <a
+                  class="row"
+                  href={href}
+                  rel={external ? "noopener me" : undefined}
+                  target={external ? "_blank" : undefined}
+                >
+                  <span class="row-index" aria-hidden="true">{String(n + 1).padStart(2, "0")}</span>
+                  <span class="row-title">{row.title}</span>
+                  <span class="row-meta">{row.meta}</span>
+                  <span class="row-note">{row.note}</span>
+                  <span class="row-trail" aria-hidden="true">
+                    <Icon name="arrow" />
+                  </span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+
+    <section class="index" id="contact" aria-labelledby="contact-label">
+      <div class="shell index-inner">
+        <h2 class="index-label" id="contact-label">{t.contact.label}</h2>
+        <ul class="rows" role="list">
+          {
+            contactOrder.map((id, n) => {
+              const item = t.contact.items[id];
+              const inner = (
+                <>
+                  <span class="row-index" aria-hidden="true">{String(n + 1).padStart(2, "0")}</span>
+                  <span class="row-title">{item.name}</span>
+                  <span class="row-meta">{item.note}</span>
+                  <span class="row-trail" aria-hidden="true">
+                    {id === "email" ? (
+                      <>
+                        <Icon name="copy" class="when-idle" />
+                        <Icon name="check" class="when-done" />
+                      </>
+                    ) : id === "wechat" ? (
+                      <Icon name="qr" />
+                    ) : (
+                      <Icon name="arrow" />
+                    )}
+                  </span>
+                </>
+              );
+              return (
+                <li class="reveal">
+                  {id === "email" ? (
+                    <button
+                      class="row"
+                      type="button"
+                      data-copy={EMAIL}
+                      data-copied-label={t.contact.copied}
+                      aria-label={`${item.action}: ${EMAIL}`}
+                    >
+                      {inner}
+                    </button>
+                  ) : id === "wechat" ? (
+                    <button class="row" type="button" data-open-dialog="wechat-dialog" aria-haspopup="dialog" aria-label={item.action}>
+                      {inner}
+                    </button>
+                  ) : (
+                    <a class="row" href={contactHref[id]} rel="noopener me" target="_blank" aria-label={item.action}>
+                      {inner}
+                    </a>
+                  )}
+                </li>
+              );
+            })
+          }
+        </ul>
+        <p class="sr-only" role="status" aria-live="polite" data-copy-status></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="shell footer-inner">
+      <span>© {year} {isZh ? "枯白啃设计" : "Kubai 087"}</span>
+      <a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备2022003459号</a>
+      <a
+        class="footer-police"
+        href="https://beian.mps.gov.cn/#/query/webSearch?code=11010502050010"
+        rel="noopener"
+        target="_blank"
+        ><img src="/img/beian.png" alt="" width="14" height="14" loading="lazy" />京公网安备11010502050010号</a
+      >
+      <a href="https://github.com/kubai087/kubai087.github.io" rel="noopener" target="_blank">{t.footer.source}</a>
+    </div>
+  </footer>
+
+  <dialog class="qr-dialog" id="wechat-dialog" aria-labelledby="wechat-title">
+    <form method="dialog" class="qr-close-form">
+      <button class="qr-close" aria-label={t.contact.close}><Icon name="close" /></button>
+    </form>
+    <h2 class="qr-title" id="wechat-title">{t.contact.wechatTitle}</h2>
+    <img src="/img/wechat-qrcode.jpg" alt={t.contact.wechatAlt} width="300" height="382" loading="lazy" decoding="async" />
+    <p class="qr-note">{t.contact.wechatNote}</p>
+  </dialog>
+</Base>
+
+<script>
+  import { initPage } from "../scripts/page";
+  initPage();
+</script>

@@ -1,0 +1,127 @@
+---
+import "@fontsource/instrument-serif/400.css";
+import "@fontsource/instrument-serif/400-italic.css";
+import "../styles/global.css";
+import { COPY, LOCALES, localePath, type Locale } from "../lib/content";
+import { EMAIL, LUMNO, PERSON_ID, SAME_AS, SITE_URL, WEBSITE_ID } from "../lib/links";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = COPY[locale];
+const canonical = new URL(localePath(locale), SITE_URL).toString();
+const ogImage = new URL("/og.png", SITE_URL).toString();
+const avatar = new URL("/avatar.png", SITE_URL).toString();
+const isZh = locale === "zh-CN";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfilePage",
+      "@id": `${canonical}#page`,
+      url: canonical,
+      name: t.seo.title,
+      description: t.seo.description,
+      inLanguage: t.htmlLang,
+      isPartOf: { "@id": WEBSITE_ID },
+      mainEntity: { "@id": PERSON_ID },
+      primaryImageOfPage: ogImage,
+    },
+    {
+      "@type": "Person",
+      "@id": PERSON_ID,
+      name: isZh ? "枯白啃设计" : "Kubai 087",
+      alternateName: isZh ? ["Kubai 087", "kubai087", "枯白"] : ["枯白啃设计", "kubai087", "Kubai"],
+      url: `${SITE_URL}/`,
+      image: avatar,
+      email: `mailto:${EMAIL}`,
+      jobTitle: isZh ? "UX 设计师" : "UX Designer",
+      description: t.seo.description,
+      knowsAbout: isZh
+        ? ["用户体验设计", "交互设计", "产品设计", "前端开发", "浏览器扩展"]
+        : ["UX design", "Interaction design", "Product design", "Front-end development", "Browser extensions"],
+      sameAs: SAME_AS,
+      owns: { "@id": LUMNO.appId },
+    },
+    {
+      "@type": "WebSite",
+      "@id": WEBSITE_ID,
+      url: `${SITE_URL}/`,
+      name: "Kubai Design",
+      alternateName: ["枯白啃设计", "Kubai 087", "kubai.design"],
+      inLanguage: LOCALES,
+      publisher: { "@id": PERSON_ID },
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": LUMNO.appId,
+      name: "Lumno",
+      url: isZh ? LUMNO.siteZh : LUMNO.siteEn,
+      applicationCategory: "BrowserApplication",
+      operatingSystem: "Windows, macOS, Linux, ChromeOS",
+      description: `${t.works.lumno.meta}${isZh ? "：" : ": "}${t.works.lumno.note}`,
+      author: { "@id": PERSON_ID },
+      isAccessibleForFree: true,
+      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+      sameAs: [LUMNO.github, LUMNO.chrome],
+    },
+  ],
+};
+---
+
+<!doctype html>
+<html lang={t.htmlLang} data-locale={locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{t.seo.title}</title>
+    <meta name="description" content={t.seo.description} />
+    <meta name="keywords" content={t.seo.keywords.join(",")} />
+    <meta name="author" content={isZh ? "枯白啃设计 Kubai 087" : "Kubai 087 (枯白啃设计)"} />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#fbfbfb" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0b0b0c" media="(prefers-color-scheme: dark)" />
+    <link rel="canonical" href={canonical} />
+    {
+      LOCALES.map((l) => (
+        <link rel="alternate" hreflang={COPY[l].htmlLang} href={new URL(localePath(l), SITE_URL).toString()} />
+      ))
+    }
+    <link rel="alternate" hreflang="x-default" href={`${SITE_URL}/`} />
+
+    <meta property="og:type" content="profile" />
+    <meta property="og:site_name" content="Kubai Design" />
+    <meta property="og:title" content={t.seo.title} />
+    <meta property="og:description" content={t.seo.description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={t.seo.title} />
+    <meta property="og:locale" content={t.ogLocale} />
+    <meta property="og:locale:alternate" content={isZh ? COPY.en.ogLocale : COPY["zh-CN"].ogLocale} />
+    <meta property="profile:username" content="kubai087" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@kubai087" />
+    <meta name="twitter:creator" content="@kubai087" />
+    <meta name="twitter:title" content={t.seo.title} />
+    <meta name="twitter:description" content={t.seo.description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <link rel="icon" href="/favicon.png" type="image/png" sizes="96x96" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="me" href="https://x.com/kubai087" />
+    <link rel="me" href="https://github.com/kubai087" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <script defer src="https://track.0http.com/script.js" data-website-id="a7bfbd0a-88f3-4258-86b7-c86a19be28f8"></script>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
