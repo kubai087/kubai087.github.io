@@ -18,7 +18,7 @@ type Copy = {
   home: string;
   language: { switchTo: string; switchLabel: string };
   hero: { name: string; /** A second name beside the first; the English page has none. */ latin?: string; role: string; line: string; avatarAlt: string };
-  works: { label: string; lumno: Row };
+  works: { label: string; lumno: Row; icons: Row; threads: Row; glasswork: Row };
   contact: {
     label: string;
     items: Record<SocialId, { name: string; note: string; action: string }>;
@@ -54,6 +54,9 @@ export const COPY: Record<Locale, Copy> = {
     works: {
       label: "作品",
       lumno: { title: "Lumno", meta: "开源浏览器命令栏", note: "一个快捷键，找到标签页、书签和历史记录" },
+      icons: { title: "Kubai Icons", meta: "开源动态图标库", note: "悬停时，图标做出物体本身的动作" },
+      threads: { title: "PRO Threads", meta: "动态光线壁纸", note: "用光线编织文字的 WebGL 壁纸" },
+      glasswork: { title: "Glasswork", meta: "液态玻璃材质工具", note: "拆解、调节液态玻璃，并复制成 CSS" },
     },
     contact: {
       label: "联系",
@@ -94,6 +97,9 @@ export const COPY: Record<Locale, Copy> = {
     works: {
       label: "Work",
       lumno: { title: "Lumno", meta: "Open-source browser command bar", note: "Tabs, bookmarks and history, one shortcut away" },
+      icons: { title: "Kubai Icons", meta: "Open-source animated icon library", note: "On hover, each icon does what its object does" },
+      threads: { title: "PRO Threads", meta: "Live light-thread wallpaper", note: "Letters woven from threads of light, in WebGL" },
+      glasswork: { title: "Glasswork", meta: "Liquid glass material playground", note: "Take liquid glass apart, tune it and copy it as CSS" },
     },
     contact: {
       label: "Contact",

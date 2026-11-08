@@ -5,6 +5,9 @@ Kubai 087 (Chinese name 枯白啃设计, handle kubai087) is an app icon designe
 ## Work
 
 - Lumno: open-source browser command bar (tab, bookmark, history and site search) and minimalist new tab. Site: https://lumno.kubai.design/ (English: https://lumno.kubai.design/en/). Source: https://github.com/kubai087/lumno-extension
+- Kubai Icons: open-source animated icon library for React, Vue and the web, in which each icon performs its object's action on hover. Site: https://icons.kubai.design/. Source: https://github.com/kubai087/kubai-icons
+- PRO Threads: animated WebGL wallpaper with letters woven from threads of light. Site: https://www.kubai.design/pro-threads/. Source: https://github.com/kubai087/pro-threads
+- Glasswork: a liquid glass material to take apart, tune and copy as CSS. Site: https://www.kubai.design/glasswork/. Source: https://github.com/kubai087/glasswork
 - App icon work and icon design tutorials, in Chinese, on Xiaohongshu: https://www.xiaohongshu.com/user/profile/5f30130300000000010006eb
 
 ## Pages

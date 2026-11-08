@@ -13,6 +13,12 @@ export const LUMNO = {
     "https://chromewebstore.google.com/detail/lumno-%E5%85%A8%E5%B1%80%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4%E6%B5%AE%E5%B1%82/nggfkkbmogmadfoikakkfegkoilfcfao",
 } as const;
 
+export const PROJECTS = {
+  icons: "https://icons.kubai.design/",
+  threads: "https://www.kubai.design/pro-threads/",
+  glasswork: "https://www.kubai.design/glasswork/",
+} as const;
+
 export type SocialId = "email" | "wechat" | "xiaohongshu" | "x" | "bonjour" | "vibecafe";
 
 export const SOCIAL = {

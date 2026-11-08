@@ -4,7 +4,7 @@ import Base from "../layouts/Base.astro";
 import Icon from "./Icon.astro";
 import avatar from "../assets/avatar-source.webp";
 import { COPY, localePath, type Locale } from "../lib/content";
-import { EMAIL, LUMNO, SOCIAL, type SocialId } from "../lib/links";
+import { EMAIL, LUMNO, PROJECTS, SOCIAL, type SocialId } from "../lib/links";
 
 interface Props {
   locale: Locale;
@@ -18,6 +18,9 @@ const year = new Date().getFullYear();
 
 const works = [
   { row: t.works.lumno, href: isZh ? LUMNO.siteZh : LUMNO.siteEn, external: false },
+  { row: t.works.icons, href: PROJECTS.icons, external: false },
+  { row: t.works.threads, href: PROJECTS.threads, external: false },
+  { row: t.works.glasswork, href: PROJECTS.glasswork, external: false },
 ] as const;
 
 const contactOrder: SocialId[] = ["email", "wechat", "xiaohongshu", "x", "bonjour", "vibecafe"];
