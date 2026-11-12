@@ -19,6 +19,9 @@ export const PROJECTS = {
   glasswork: "https://www.kubai.design/glasswork/",
 } as const;
 
+/** Friends' sites, in the footer. Karl's is plain http until its custom domain serves a valid certificate. */
+export const FRIENDS = [{ name: "Karl Coding", url: "http://www.leekarl.com/" }] as const;
+
 export type SocialId = "email" | "wechat" | "xiaohongshu" | "x" | "bonjour" | "vibecafe";
 
 export const SOCIAL = {

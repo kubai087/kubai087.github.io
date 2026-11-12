@@ -4,7 +4,7 @@ import Base from "../layouts/Base.astro";
 import Icon from "./Icon.astro";
 import avatar from "../assets/avatar-source.webp";
 import { COPY, localePath, type Locale } from "../lib/content";
-import { EMAIL, LUMNO, PROJECTS, SOCIAL, type SocialId } from "../lib/links";
+import { EMAIL, FRIENDS, LUMNO, PROJECTS, SOCIAL, type SocialId } from "../lib/links";
 
 interface Props {
   locale: Locale;
@@ -160,6 +160,17 @@ const contactHref: Partial<Record<SocialId, string>> = {
   </main>
 
   <footer class="footer">
+    <div class="shell footer-links">
+      <nav aria-label={t.footer.works}>
+        <span class="footer-label">{t.footer.works}</span>
+        <a href={isZh ? LUMNO.siteZh : LUMNO.siteEn}>Lumno</a>
+        <a href={PROJECTS.icons}>Kubai Icons</a>
+      </nav>
+      <nav aria-label={t.footer.friends}>
+        <span class="footer-label">{t.footer.friends}</span>
+        {FRIENDS.map((friend) => <a href={friend.url} rel="noopener" target="_blank">{friend.name}</a>)}
+      </nav>
+    </div>
     <div class="shell footer-inner">
       <span>© {year} {isZh ? "枯白啃设计" : "Kubai 087"}</span>
       <a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备2022003459号</a>

@@ -385,6 +385,25 @@ button {
   gap: 8px 24px;
 }
 
+/* The author's other sites and friends' sites, one line above the legal row. */
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 40px;
+  margin-bottom: 16px;
+}
+
+.footer-links nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+}
+
+.footer-label {
+  color: var(--ink-2);
+}
+
+.footer-links a:hover,
 .footer-inner a:hover {
   color: var(--ink);
 }

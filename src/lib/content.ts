@@ -28,7 +28,7 @@ type Copy = {
     wechatAlt: string;
     close: string;
   };
-  footer: { source: string };
+  footer: { source: string; works: string; friends: string };
 };
 
 export const COPY: Record<Locale, Copy> = {
@@ -74,7 +74,7 @@ export const COPY: Record<Locale, Copy> = {
       wechatAlt: "枯白啃设计的微信二维码",
       close: "关闭",
     },
-    footer: { source: "本站源码" },
+    footer: { source: "本站源码", works: "作品", friends: "友情链接" },
   },
   en: {
     htmlLang: "en",
@@ -117,6 +117,6 @@ export const COPY: Record<Locale, Copy> = {
       wechatAlt: "Kubai 087's WeChat QR code",
       close: "Close",
     },
-    footer: { source: "Source" },
+    footer: { source: "Source", works: "Work", friends: "Friends" },
   },
 };
